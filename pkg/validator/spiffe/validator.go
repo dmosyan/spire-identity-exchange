@@ -212,7 +212,7 @@ func NewValidator(cfg Config) (*Validator, error) {
 		// on return, so no further startup synchronization is needed.
 		bundleSource, err := spiffetls.NewBundleSource(cfg.workloadAPISocketPath())
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to initialize workload API JWT key provider: %w", err)
 		}
 
 		wlProvider := NewWorkloadAPIKeyProvider(bundleSource, jwksTD, cfg.Metrics)
